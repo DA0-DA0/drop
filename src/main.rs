@@ -65,12 +65,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             .or_insert(Account { address, amount });
     }
 
-    // Iterate through hashmap to create CSV
+    let mut total_drop_amount = 0;
+    let mut total_drop_count = 0;
+
+    // Iterate through hashmap to create CSV and totals
     for (_, account) in drop.into_iter() {
         if account.amount > args.min_staked_amount {
             wtr.write_record(&[account.address, &account.amount.to_string()])?;
+            total_drop_amount += account.amount;
+            total_drop_count += 1;
         }
     }
+
+    println!("Number of accounts: {:?}", total_drop_count);
+    println!("Total drop amount: {:?}", total_drop_amount);
 
     // Write CSV
     wtr.flush()?;
