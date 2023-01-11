@@ -1,0 +1,12 @@
+[package]
+name = "dao-drop"
+description = "This tool parses a Cosmos SDK chain export JSON file, to produce a CSV list of addresses and amounts."
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.0.32", features = ["derive"] }
+csv = "1.1.6"
+serde_json = "1.0.91"
